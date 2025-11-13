@@ -84,16 +84,17 @@ body {
 
 /* ヒーローセクション */
 .hero {
-  position: relative;
-  height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
 }
 
 .hero-image {
-  width: 100vw;         /* 画面の横幅にぴったり */
-  height: auto;         /* 高さは自動調整 */
-  object-fit: cover;    /* はみ出し防止＆美しくトリミング */
+  width: 100%;
+  height: auto;
   display: block;
+  object-fit: contain; /* cover → contain に変更 */
 }
 
 .hero-text {
