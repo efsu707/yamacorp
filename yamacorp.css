@@ -169,3 +169,7 @@ button {
   background: #eee;
   font-size: 0.8rem;
 }
+
+@media screen and (max-width: 600px) {
+  /* スマホ用スタイル */
+}
