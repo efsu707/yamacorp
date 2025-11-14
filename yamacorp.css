@@ -7,16 +7,13 @@ body {
 
 /* ヘッダー */
 .navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: #ffffffde;
-  padding: 10px 16px;
+  position: relative;     /* ← ボタンの絶対位置の基準にする */
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  padding: 10px 16px;
+  background: #fff;
   border-bottom: 1px solid #ccc;
-  z-index: 1000;
+  background-color: #ffffffde;
 }
 
 .ylogo {
@@ -24,14 +21,16 @@ body {
 }
 
 .menu-toggle {
-  font-size: 2rem;
+  position: absolute;
+  top: 50%;
+  right: 16px;            /* ← 画面右端から16pxの余裕 */
+  transform: translateY(-50%);
+  font-size: 2.8rem;
   background: none;
   border: none;
   cursor: pointer;
+  z-index: 1001;
   color: black;
-  margin-right: 0;         /* 右寄せを防ぐ */
-  margin-left: auto;       /* 左に押し出す */
-  padding: 0;
 }
 
 /* スライドメニュー */
