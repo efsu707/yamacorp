@@ -18,14 +18,6 @@ window.onload = () => {
     sideMenu.classList.remove("open");
   });
 
-  const header = document.querySelector(".navbar");
-  const hero = document.querySelector(".hero");
-
-  if (header && hero) {
-    const headerHeight = header.offsetHeight;
-    hero.style.paddingTop = `${headerHeight}px`;
-  }
-
   // フォーム送信
   document.querySelector("form").addEventListener("submit", (e) => {
     e.preventDefault();
