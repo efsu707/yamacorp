@@ -77,7 +77,7 @@ body {
 
 .side-logo {
   margin-top: auto;
-  text-align: center;
+  text-align: left;
 }
 
 .pluslogo {
@@ -100,7 +100,7 @@ body {
 
 .hero-text {
   position: absolute;
-  top: 55%; /* ← 50% → 55% に変更して少し下へ */
+  top: 45%; /* ← 50% → 55% に変更して少し下へ */
   left: 10%;
   transform: translateY(-50%);
   color: white;
