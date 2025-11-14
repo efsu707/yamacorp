@@ -11,7 +11,7 @@ body {
   top: 0;
   width: 100%;
   background: #ffffffde;
-  padding: 10px 20px;
+  padding: 10px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,7 +20,7 @@ body {
 }
 
 .ylogo {
-  height: 40px;
+  height: 60px;
 }
 
 .menu-toggle {
@@ -29,6 +29,9 @@ body {
   border: none;
   cursor: pointer;
   color: black;
+  margin-right: 0;         /* 右寄せを防ぐ */
+  margin-left: auto;       /* 左に押し出す */
+  padding: 0;
 }
 
 /* スライドメニュー */
