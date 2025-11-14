@@ -85,8 +85,7 @@ body {
 /* ヒーローセクション */
 .hero {
   width: 100%;
-  margin: 0;
-  padding: 0;
+  position: relative;
   overflow: hidden;
 }
 
@@ -100,11 +99,11 @@ body {
 .hero-text {
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  left: 10%;
+  transform: translateY(-50%);
   color: white;
-  text-align: center;
-  width: 90%;
+  text-align: left;
+  width: 80%;
 }
 
 .hero-h1 {
