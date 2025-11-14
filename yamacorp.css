@@ -98,7 +98,7 @@ body {
 
 .hero-text {
   position: absolute;
-  top: 50%;
+  top: 55%; /* ← 50% → 55% に変更して少し下へ */
   left: 10%;
   transform: translateY(-50%);
   color: white;
