@@ -180,3 +180,43 @@ button {
 @media screen and (max-width: 600px) {
   /* スマホ用スタイル */
 }
+
+/* 社長メッセージセクション */
+.message-container {
+  display: flex;
+  align-items: flex-start; /* 写真上端に本文を揃える */
+  gap: 20px;               /* 写真と本文の間隔 */
+}
+
+.president-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 180px; /* 写真＋キャプションの幅を固定（小さめ） */
+}
+
+.president-photo {
+  width: 100%;
+  border-radius: 6px; /* 角丸でモダンに */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.president-caption {
+  margin-top: 8px;
+  padding: 10px;
+  width: 100%; /* 写真と同じ幅 */
+  text-align: center;
+  background: #f0f0f0;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  border-radius: 6px;
+  color: #333;
+}
+
+/* 本文 */
+.message-text {
+  flex: 1; /* 残りの幅を使う */
+  font-size: 1rem;
+  line-height: 1.6;
+}
