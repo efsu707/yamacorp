@@ -32,7 +32,7 @@ function drawChart() {
   // 公開したGoogleスプレッドシートのURLを指定
   // 【シートID】と【シート名】を実際のものに置き換えてください
   var query = new google.visualization.Query(
-    'https://docs.google.com/spreadsheets/d/【シートID】/gviz/tq?sheet=【シート名】'
+    'https://docs.google.com/spreadsheets/d/2PACX-1vT7W4nCbQYYArDQK8D0Y03gYbm-XvbBDrPOY0KzWt7D16rFIJ43TSE8b7lTjOGaI6xD-UGcN0GfgY9l/gviz/tq?sheet=シート1'
   );
 
   query.send(handleQueryResponse);
