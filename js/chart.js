@@ -26,7 +26,7 @@ function handleResponse(response) {
 
   // ▼ 累積ポイント用の新しいデータテーブルを作成
   const data = new google.visualization.DataTable();
-  data.addColumn('string', '日付');
+  data.addColumn('date', '日付');
   data.addColumn('number', '累積ポイント');
 
   let cumulative = 0;
