@@ -2,7 +2,7 @@
 google.charts.load('current', { packages: ['corechart'] });
 google.charts.setOnLoadCallback(drawChart);
 
-// ▼ 必要に応じてここを編集
+// ▼ スプレッドシート設定
 const SPREADSHEET_ID = '1bioT0zhf6akhq2TBiZRL-P34GN1CA7jUaZbg6VHC2sU';
 const SHEET_NAME = 'point';
 
@@ -24,19 +24,18 @@ function handleResponse(response) {
 
   const rawData = response.getDataTable();
 
-  // ▼ 累積ポイント用の新しいデータテーブルを作成
+  // ▼ 累積ポイント用の新しいデータテーブルを作成（Date型対応）
   const data = new google.visualization.DataTable();
-  data.addColumn('date', '日付');
+  data.addColumn('date', '日付');              // ← Date型に変更
   data.addColumn('number', '累積ポイント');
 
   let cumulative = 0;
 
   for (let i = 0; i < rawData.getNumberOfRows(); i++) {
-    const date = rawData.getValue(i, 0);       // A列：日付
-    const point = rawData.getValue(i, 1) || 0; // B列：その日のポイント
+    const date = rawData.getValue(i, 0);       // Date型で取得
+    const point = rawData.getValue(i, 1) || 0;
 
     cumulative += point;
-
     data.addRow([date, cumulative]);
   }
 
@@ -47,7 +46,11 @@ function handleResponse(response) {
     legend: { position: 'bottom' },
     curveType: 'function',
     width: '100%',
-    height: 400
+    height: 400,
+    hAxis: {
+      format: 'MM/dd', // ← 軸のフォーマットを月/日表示に
+      gridlines: { count: 10 }
+    }
   };
 
   const chart = new google.visualization.LineChart(document.getElementById('chart'));
