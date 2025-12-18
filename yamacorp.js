@@ -24,37 +24,3 @@ window.onload = () => {
   });
 };
 
-// Google Chartsライブラリをロード
-google.charts.load('current', { packages: ['corechart'] });
-google.charts.setOnLoadCallback(drawChart);
-
-function drawChart() {
-  // 公開したGoogleスプレッドシートのURLを指定
-  // 【シートID】と【シート名】を実際のものに置き換えてください
-  var query = new google.visualization.Query(
-  'https://docs.google.com/spreadsheets/d/e/2PACX-1vT7W4nCbQYYArDQK8D0Y03gYbm-XvbBDrPOY0KzWt7D16rFIJ43TSE8b7lTjOGaI6xD-UGcN0GfgY9l/gviz/tq?sheet=シート1'
-  );
-
-  query.send(handleQueryResponse);
-}
-
-function handleQueryResponse(response) {
-  if (response.isError()) {
-    console.error('エラー: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-    return;
-  }
-
-  var data = response.getDataTable();
-  var options = {
-    title: '最新データグラフ',
-    width: '100%',
-    height: 400,
-    legend: { position: 'bottom' },
-    hAxis: { title: '項目' },
-    vAxis: { title: '値' }
-  };
-
-  // 折れ線グラフを描画（必要に応じて BarChart や PieChart に変更可能）
-  var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-  chart.draw(data, options);
-}

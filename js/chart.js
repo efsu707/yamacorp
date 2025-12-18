@@ -6,6 +6,8 @@ google.charts.setOnLoadCallback(drawChart);
 const SPREADSHEET_ID = '1bioT0zhf6akhq2TBiZRL-P34GN1CA7jUaZbg6VHC2sU';
 const SHEET_NAME = 'point';
 
+let originalRawData = null; // 元データ保持用
+
 // メイン描画関数
 function drawChart() {
   const spreadsheetUrl =
@@ -22,21 +24,49 @@ function handleResponse(response) {
     return;
   }
 
-  const rawData = response.getDataTable();
+  originalRawData = response.getDataTable();
 
-  // ▼ 累積ポイント用の新しいデータテーブルを作成（Date型対応）
+  // 初期表示：1か月
+  drawFilteredChart("1m");
+}
+
+// ▼ 期間フィルタリングしてグラフ描画
+function drawFilteredChart(range) {
+  if (!originalRawData) return;
+
+  const now = new Date();
+  let startDate = new Date();
+
+  switch (range) {
+    case "1w":
+      startDate.setDate(now.getDate() - 7);
+      break;
+    case "1m":
+      startDate.setMonth(now.getMonth() - 1);
+      break;
+    case "3m":
+      startDate.setMonth(now.getMonth() - 3);
+      break;
+    case "1y":
+      startDate.setFullYear(now.getFullYear() - 1);
+      break;
+  }
+
+  // ▼ 累積ポイント用の新しいデータテーブル
   const data = new google.visualization.DataTable();
-  data.addColumn('date', '日付');              // ← Date型に変更
+  data.addColumn('date', '日付');
   data.addColumn('number', '累積ポイント');
 
   let cumulative = 0;
 
-  for (let i = 0; i < rawData.getNumberOfRows(); i++) {
-    const date = rawData.getValue(i, 0);       // Date型で取得
-    const point = rawData.getValue(i, 1) || 0;
+  for (let i = 0; i < originalRawData.getNumberOfRows(); i++) {
+    const date = originalRawData.getValue(i, 0);
+    const point = originalRawData.getValue(i, 1) || 0;
 
-    cumulative += point;
-    data.addRow([date, cumulative]);
+    if (date >= startDate) {
+      cumulative += point;
+      data.addRow([date, cumulative]);
+    }
   }
 
   const options = {
@@ -48,7 +78,7 @@ function handleResponse(response) {
     width: '100%',
     height: 400,
     hAxis: {
-      format: 'MM/dd', // ← 軸のフォーマットを月/日表示に
+      format: 'MM/dd',
       gridlines: { count: 10 }
     }
   };
@@ -56,6 +86,11 @@ function handleResponse(response) {
   const chart = new google.visualization.LineChart(document.getElementById('chart'));
   chart.draw(data, options);
 }
+
+// ▼ ボタンから呼び出す関数
+window.changeRange = function(range) {
+  drawFilteredChart(range);
+};
 
 // ▼ 一定間隔で再描画（リアルタイム更新）
 const REFRESH_INTERVAL_MS = 60000; // 60秒
