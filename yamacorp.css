@@ -223,3 +223,24 @@ button {
   font-size: 1rem;
   line-height: 1.6;
 }
+
+.chart-buttons {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;   /* ← 中央揃え */
+  gap: 10px;
+  width: 100%;
+}
+
+.chart-buttons button {
+  padding: 8px 16px;
+  background: #004080;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.chart-buttons button:hover {
+  background: #0060c0;
+}

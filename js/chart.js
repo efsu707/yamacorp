@@ -30,7 +30,7 @@ function handleResponse(response) {
   drawFilteredChart("1m");
 }
 
-// ▼ 期間フィルタリングしてグラフ描画
+// ▼ 期間フィルタリングしてグラフ描画（累積しない）
 function drawFilteredChart(range) {
   if (!originalRawData) return;
 
@@ -52,25 +52,22 @@ function drawFilteredChart(range) {
       break;
   }
 
-  // ▼ 累積ポイント用の新しいデータテーブル
+  // ▼ 新しいデータテーブル（累積なし）
   const data = new google.visualization.DataTable();
   data.addColumn('date', '日付');
-  data.addColumn('number', '累積ポイント');
-
-  let cumulative = 0;
+  data.addColumn('number', 'ポイント');
 
   for (let i = 0; i < originalRawData.getNumberOfRows(); i++) {
     const date = originalRawData.getValue(i, 0);
     const point = originalRawData.getValue(i, 1) || 0;
 
     if (date >= startDate) {
-      cumulative += point;
-      data.addRow([date, cumulative]);
+      data.addRow([date, point]);
     }
   }
 
   const options = {
-    title: '累積ポイント推移（山岸コーポレーション）',
+    title: 'ポイント推移（山岸コーポレーション）',
     colors: ['#005BAC'],
     backgroundColor: '#f7f9fc',
     legend: { position: 'bottom' },
